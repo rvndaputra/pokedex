@@ -1,0 +1,8 @@
+fragment Pokemon on pokemon_v2_pokemon {
+  id
+  name
+  order
+  height
+  weight
+  ...PokemonTypes
+}

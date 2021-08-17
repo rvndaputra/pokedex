@@ -1,0 +1,5 @@
+query pokemon($limit: Int) {
+  pokemon: pokemon_v2_pokemon(limit: $limit) {
+    ...Pokemon
+  }
+}

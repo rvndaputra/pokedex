@@ -1,0 +1,197 @@
+:root {
+  --normal: #ffffff;
+  --fighting: #e9573f;
+  --flying: #4fc1e9;
+  --poison: #967adc;
+  --ground: #f6bb42;
+  --rock: #fc6e51;
+  --bug: #37bc9b;
+  --ghost: #ac92ec;
+  --steel: #aab2bd;
+  --fire: #da4453;
+  --water: #3bafda;
+  --grass: #a0d468;
+  --electric: #ffce54;
+  --psychic: #d770ad;
+  --ice: #4fc1e9;
+  --dragon: #4a89dc;
+  --dark: #000000;
+  --fairy: #ec87c0;
+  --unknown: #brown;
+  --shadow: #brown;
+}
+
+@font-face {
+  font-family: "FreePixel";
+  src: local("FreePixel"), url(./assets/fonts/FreePixel.ttf) format("truetype");
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "FreePixel", "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+ul {
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.normal {
+  color: #000;
+  background-color: var(--normal);
+
+  &:hover {
+    background-color: hsl(216, 33, 87);
+  }
+}
+
+.fighting {
+  background-color: var(--fighting);
+
+  &:hover {
+    background-color: hsl(8, 79, 48);
+  }
+}
+
+.flying {
+  background-color: var(--flying);
+
+  &:hover {
+    background-color: hsl(196, 78, 51);
+  }
+}
+
+.poison {
+  background-color: var(--poison);
+
+  &:hover {
+    background-color: hsl(257, 58, 57);
+  }
+}
+
+.ground {
+  background-color: var(--ground);
+
+  &:hover {
+    background-color: hsl(40, 91, 51);
+  }
+}
+
+.rock {
+  background-color: var(--rock);
+
+  &:hover {
+    background-color: hsl(10, 97, 55);
+  }
+}
+
+.bug {
+  background-color: var(--bug);
+
+  &:hover {
+    background-color: hsl(165, 55, 38);
+  }
+}
+
+.ghost {
+  background-color: var(--ghost);
+
+  &:hover {
+    background-color: hsl(257, 70, 65);
+  }
+}
+
+.steel {
+  background-color: var(--steel);
+
+  &:hover {
+    background-color: hsl(215, 13, 60);
+  }
+}
+
+.fire {
+  background-color: var(--fire);
+
+  &:hover {
+    background-color: hsl(354, 67, 46);
+  }
+}
+
+.water {
+  background-color: var(--water);
+
+  &:hover {
+    background-color: hsl(196, 68, 44);
+  }
+}
+
+.grass {
+  background-color: var(--grass);
+
+  &:hover {
+    background-color: hsl(89, 56, 52);
+  }
+}
+
+.electric {
+  background-color: var(--electric);
+
+  &:hover {
+    background-color: hsl(43, 100, 56);
+  }
+}
+
+.psychic {
+  background-color: var(--psychic);
+
+  &:hover {
+    background-color: hsl(324, 56, 54);
+  }
+}
+
+.ice {
+  background-color: var(--ice);
+
+  &:hover {
+    background-color: hsl(196, 78, 51);
+  }
+}
+
+.dragon {
+  background-color: var(--dragon);
+
+  &:hover {
+    background-color: hsl(214, 68, 48);
+  }
+}
+
+.dark {
+  color: #ffffff;
+  background-color: var(--dark);
+
+  &:hover {
+    background-color: hsl(0, 0, 10);
+  }
+}
+
+.fairy {
+  background-color: var(--fairy);
+
+  &:hover {
+    background-color: hsl(326, 73, 63);
+  }
+}

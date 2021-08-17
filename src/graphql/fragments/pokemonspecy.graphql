@@ -1,0 +1,8 @@
+fragment PokemonSpecy on pokemon_v2_pokemon {
+  pokemonspecy: pokemon_v2_pokemonspecy {
+    base_happiness
+    capture_rate
+    gender_rate
+    has_gender_differences
+  }
+}
