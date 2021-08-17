@@ -1,8 +1,10 @@
 import { ApolloProvider } from "@apollo/client";
+import "normalize.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
+import "./index.scss";
 import client from "./libs/apollo";
 import reportWebVitals from "./reportWebVitals";
 
