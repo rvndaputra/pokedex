@@ -1,5 +1,5 @@
 overwrite: true
-schema: ${SCHEMA_PATH}
+schema: ${REACT_APP_SCHEMA_PATH}
 documents: "src/graphql/**/*.graphql"
 generates:
   src/generated/graphql.tsx:
