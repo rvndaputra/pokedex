@@ -1,8 +1,14 @@
 fragment PokemonSpecy on pokemon_v2_pokemon {
-  pokemonspecy: pokemon_v2_pokemonspecy {
-    base_happiness
+  specy: pokemon_v2_pokemonspecy {
     capture_rate
-    gender_rate
-    has_gender_differences
+    evolutionchain: pokemon_v2_evolutionchain {
+      species: pokemon_v2_pokemonspecies(order_by: $PokemonSpeciesOrderBy) {
+        id
+        name
+        pokemon: pokemon_v2_pokemons(limit: $PokemonsLimit) {
+          ...PokemonTypes
+        }
+      }
+    }
   }
 }

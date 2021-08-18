@@ -1,0 +1,9 @@
+fragment PokemonStats on pokemon_v2_pokemon {
+  stats: pokemon_v2_pokemonstats {
+    base_stat
+    stat: pokemon_v2_stat {
+      id
+      name
+    }
+  }
+}

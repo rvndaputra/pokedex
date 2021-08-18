@@ -1,0 +1,19 @@
+fragment PokemonMoves on pokemon_v2_pokemon {
+  moves: pokemon_v2_pokemonmoves(
+    order_by: $PokemonMovesOrderBy
+    where: $PokemonMovesWhere
+  ) {
+    id
+    level
+    move: pokemon_v2_move {
+      name
+      power
+      accuracy
+      pp
+      pokemon_v2_type {
+        name
+      }
+      move_effect_chance
+    }
+  }
+}

@@ -51711,18 +51711,35 @@ export type Subscription_RootPokemon_V2_Versionname_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type PokemonFragment = { __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }>, pokemonspecy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', base_happiness?: Maybe<number>, capture_rate?: Maybe<number>, gender_rate?: Maybe<number>, has_gender_differences: boolean }> };
+export type PokemonFragment = { __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> };
 
-export type PokemonSpecyFragment = { __typename?: 'pokemon_v2_pokemon', pokemonspecy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', base_happiness?: Maybe<number>, capture_rate?: Maybe<number>, gender_rate?: Maybe<number>, has_gender_differences: boolean }> };
+export type PokemonAbilitiesFragment = { __typename?: 'pokemon_v2_pokemon', abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', is_hidden: boolean, ability?: Maybe<{ __typename?: 'pokemon_v2_ability', name: string }> }> };
 
-export type PokemonTypesFragment = { __typename?: 'pokemon_v2_pokemon', pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> };
+export type PokemonMovesFragment = { __typename?: 'pokemon_v2_pokemon', moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', id: number, level: number, move?: Maybe<{ __typename?: 'pokemon_v2_move', name: string, power?: Maybe<number>, accuracy?: Maybe<number>, pp?: Maybe<number>, move_effect_chance?: Maybe<number>, pokemon_v2_type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> };
+
+export type PokemonSpecyFragment = { __typename?: 'pokemon_v2_pokemon', specy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', capture_rate?: Maybe<number>, evolutionchain?: Maybe<{ __typename?: 'pokemon_v2_evolutionchain', species: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string, pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> }> }> }> };
+
+export type PokemonStatsFragment = { __typename?: 'pokemon_v2_pokemon', stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, stat?: Maybe<{ __typename?: 'pokemon_v2_stat', id: number, name: string }> }> };
+
+export type PokemonTypesFragment = { __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> };
+
+export type PokemonDetailQueryVariables = Exact<{
+  PokemonWhere: Pokemon_V2_Pokemon_Bool_Exp;
+  PokemonSpeciesOrderBy?: Maybe<Array<Pokemon_V2_Pokemonspecies_Order_By> | Pokemon_V2_Pokemonspecies_Order_By>;
+  PokemonsLimit?: Maybe<Scalars['Int']>;
+  PokemonMovesOrderBy?: Maybe<Array<Pokemon_V2_Pokemonmove_Order_By> | Pokemon_V2_Pokemonmove_Order_By>;
+  PokemonMovesWhere?: Maybe<Pokemon_V2_Pokemonmove_Bool_Exp>;
+}>;
+
+
+export type PokemonDetailQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }>, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', is_hidden: boolean, ability?: Maybe<{ __typename?: 'pokemon_v2_ability', name: string }> }>, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, stat?: Maybe<{ __typename?: 'pokemon_v2_stat', id: number, name: string }> }>, specy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', capture_rate?: Maybe<number>, evolutionchain?: Maybe<{ __typename?: 'pokemon_v2_evolutionchain', species: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string, pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> }> }> }>, moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', id: number, level: number, move?: Maybe<{ __typename?: 'pokemon_v2_move', name: string, power?: Maybe<number>, accuracy?: Maybe<number>, pp?: Maybe<number>, move_effect_chance?: Maybe<number>, pokemon_v2_type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> }> };
 
 export type PokemonQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
 }>;
 
 
-export type PokemonQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, pokemontypes: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }>, pokemonspecy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', base_happiness?: Maybe<number>, capture_rate?: Maybe<number>, gender_rate?: Maybe<number>, has_gender_differences: boolean }> }> };
+export type PokemonQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> };
 
 export type TypeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -51731,20 +51748,10 @@ export type TypeQuery = { __typename?: 'query_root', type: Array<{ __typename?: 
 
 export const PokemonTypesFragmentDoc = gql`
     fragment PokemonTypes on pokemon_v2_pokemon {
-  pokemontypes: pokemon_v2_pokemontypes {
+  types: pokemon_v2_pokemontypes {
     type: pokemon_v2_type {
       name
     }
-  }
-}
-    `;
-export const PokemonSpecyFragmentDoc = gql`
-    fragment PokemonSpecy on pokemon_v2_pokemon {
-  pokemonspecy: pokemon_v2_pokemonspecy {
-    base_happiness
-    capture_rate
-    gender_rate
-    has_gender_differences
   }
 }
     `;
@@ -51756,21 +51763,125 @@ export const PokemonFragmentDoc = gql`
   height
   weight
   ...PokemonTypes
-  ...PokemonSpecy
+}
+    ${PokemonTypesFragmentDoc}`;
+export const PokemonAbilitiesFragmentDoc = gql`
+    fragment PokemonAbilities on pokemon_v2_pokemon {
+  abilities: pokemon_v2_pokemonabilities {
+    is_hidden
+    ability: pokemon_v2_ability {
+      name
+    }
+  }
+}
+    `;
+export const PokemonMovesFragmentDoc = gql`
+    fragment PokemonMoves on pokemon_v2_pokemon {
+  moves: pokemon_v2_pokemonmoves(
+    order_by: $PokemonMovesOrderBy
+    where: $PokemonMovesWhere
+  ) {
+    id
+    level
+    move: pokemon_v2_move {
+      name
+      power
+      accuracy
+      pp
+      pokemon_v2_type {
+        name
+      }
+      move_effect_chance
+    }
+  }
+}
+    `;
+export const PokemonSpecyFragmentDoc = gql`
+    fragment PokemonSpecy on pokemon_v2_pokemon {
+  specy: pokemon_v2_pokemonspecy {
+    capture_rate
+    evolutionchain: pokemon_v2_evolutionchain {
+      species: pokemon_v2_pokemonspecies(order_by: $PokemonSpeciesOrderBy) {
+        id
+        name
+        pokemon: pokemon_v2_pokemons(limit: $PokemonsLimit) {
+          ...PokemonTypes
+        }
+      }
+    }
+  }
+}
+    ${PokemonTypesFragmentDoc}`;
+export const PokemonStatsFragmentDoc = gql`
+    fragment PokemonStats on pokemon_v2_pokemon {
+  stats: pokemon_v2_pokemonstats {
+    base_stat
+    stat: pokemon_v2_stat {
+      id
+      name
+    }
+  }
+}
+    `;
+export const PokemonDetailDocument = gql`
+    query PokemonDetail($PokemonWhere: pokemon_v2_pokemon_bool_exp!, $PokemonSpeciesOrderBy: [pokemon_v2_pokemonspecies_order_by!], $PokemonsLimit: Int, $PokemonMovesOrderBy: [pokemon_v2_pokemonmove_order_by!], $PokemonMovesWhere: pokemon_v2_pokemonmove_bool_exp) {
+  pokemon: pokemon_v2_pokemon(where: $PokemonWhere) {
+    id
+    name
+    order
+    height
+    weight
+    ...PokemonTypes
+    ...PokemonAbilities
+    ...PokemonStats
+    ...PokemonSpecy
+    ...PokemonMoves
+  }
 }
     ${PokemonTypesFragmentDoc}
-${PokemonSpecyFragmentDoc}`;
+${PokemonAbilitiesFragmentDoc}
+${PokemonStatsFragmentDoc}
+${PokemonSpecyFragmentDoc}
+${PokemonMovesFragmentDoc}`;
+
+/**
+ * __usePokemonDetailQuery__
+ *
+ * To run a query within a React component, call `usePokemonDetailQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePokemonDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePokemonDetailQuery({
+ *   variables: {
+ *      PokemonWhere: // value for 'PokemonWhere'
+ *      PokemonSpeciesOrderBy: // value for 'PokemonSpeciesOrderBy'
+ *      PokemonsLimit: // value for 'PokemonsLimit'
+ *      PokemonMovesOrderBy: // value for 'PokemonMovesOrderBy'
+ *      PokemonMovesWhere: // value for 'PokemonMovesWhere'
+ *   },
+ * });
+ */
+export function usePokemonDetailQuery(baseOptions: Apollo.QueryHookOptions<PokemonDetailQuery, PokemonDetailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PokemonDetailQuery, PokemonDetailQueryVariables>(PokemonDetailDocument, options);
+      }
+export function usePokemonDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PokemonDetailQuery, PokemonDetailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PokemonDetailQuery, PokemonDetailQueryVariables>(PokemonDetailDocument, options);
+        }
+export type PokemonDetailQueryHookResult = ReturnType<typeof usePokemonDetailQuery>;
+export type PokemonDetailLazyQueryHookResult = ReturnType<typeof usePokemonDetailLazyQuery>;
+export type PokemonDetailQueryResult = Apollo.QueryResult<PokemonDetailQuery, PokemonDetailQueryVariables>;
 export const PokemonDocument = gql`
     query pokemon($limit: Int) {
   pokemon: pokemon_v2_pokemon(limit: $limit) {
     ...Pokemon
-    ...PokemonTypes
-    ...PokemonSpecy
   }
 }
-    ${PokemonFragmentDoc}
-${PokemonTypesFragmentDoc}
-${PokemonSpecyFragmentDoc}`;
+    ${PokemonFragmentDoc}`;
 
 /**
  * __usePokemonQuery__

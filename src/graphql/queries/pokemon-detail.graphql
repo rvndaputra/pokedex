@@ -1,0 +1,20 @@
+query PokemonDetail(
+  $PokemonWhere: pokemon_v2_pokemon_bool_exp!
+  $PokemonSpeciesOrderBy: [pokemon_v2_pokemonspecies_order_by!]
+  $PokemonsLimit: Int
+  $PokemonMovesOrderBy: [pokemon_v2_pokemonmove_order_by!]
+  $PokemonMovesWhere: pokemon_v2_pokemonmove_bool_exp
+) {
+  pokemon: pokemon_v2_pokemon(where: $PokemonWhere) {
+    id
+    name
+    order
+    height
+    weight
+    ...PokemonTypes
+    ...PokemonAbilities
+    ...PokemonStats
+    ...PokemonSpecy
+    ...PokemonMoves
+  }
+}

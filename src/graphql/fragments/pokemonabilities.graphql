@@ -1,0 +1,8 @@
+fragment PokemonAbilities on pokemon_v2_pokemon {
+  abilities: pokemon_v2_pokemonabilities {
+    is_hidden
+    ability: pokemon_v2_ability {
+      name
+    }
+  }
+}
