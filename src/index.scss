@@ -34,6 +34,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #000;
+  color: #fff;
 }
 
 code {
@@ -55,7 +56,7 @@ a {
   background-color: var(--normal);
 
   &:hover {
-    background-color: hsl(216, 33, 87);
+    background-color: hsl(216, 33, 87%);
   }
 }
 
@@ -63,7 +64,7 @@ a {
   background-color: var(--fighting);
 
   &:hover {
-    background-color: hsl(8, 79, 48);
+    background-color: hsl(8, 79, 48%);
   }
 }
 
@@ -71,7 +72,7 @@ a {
   background-color: var(--flying);
 
   &:hover {
-    background-color: hsl(196, 78, 51);
+    background-color: hsl(196, 78, 51%);
   }
 }
 
@@ -79,7 +80,7 @@ a {
   background-color: var(--poison);
 
   &:hover {
-    background-color: hsl(257, 58, 57);
+    background-color: hsl(257, 58, 57%);
   }
 }
 
@@ -87,7 +88,7 @@ a {
   background-color: var(--ground);
 
   &:hover {
-    background-color: hsl(40, 91, 51);
+    background-color: hsl(40, 91, 51%);
   }
 }
 
@@ -95,7 +96,7 @@ a {
   background-color: var(--rock);
 
   &:hover {
-    background-color: hsl(10, 97, 55);
+    background-color: hsl(10, 97, 55%);
   }
 }
 
@@ -103,7 +104,7 @@ a {
   background-color: var(--bug);
 
   &:hover {
-    background-color: hsl(165, 55, 38);
+    background-color: hsl(165, 55, 38%);
   }
 }
 
@@ -111,7 +112,7 @@ a {
   background-color: var(--ghost);
 
   &:hover {
-    background-color: hsl(257, 70, 65);
+    background-color: hsl(257, 70, 65%);
   }
 }
 
@@ -119,7 +120,7 @@ a {
   background-color: var(--steel);
 
   &:hover {
-    background-color: hsl(215, 13, 60);
+    background-color: hsl(215, 13, 60%);
   }
 }
 
@@ -127,7 +128,7 @@ a {
   background-color: var(--fire);
 
   &:hover {
-    background-color: hsl(354, 67, 46);
+    background-color: hsl(354, 67, 46%);
   }
 }
 
@@ -135,7 +136,7 @@ a {
   background-color: var(--water);
 
   &:hover {
-    background-color: hsl(196, 68, 44);
+    background-color: hsl(196, 68, 44%);
   }
 }
 
@@ -143,7 +144,7 @@ a {
   background-color: var(--grass);
 
   &:hover {
-    background-color: hsl(89, 56, 52);
+    background-color: hsl(89, 56, 52%);
   }
 }
 
@@ -151,7 +152,7 @@ a {
   background-color: var(--electric);
 
   &:hover {
-    background-color: hsl(43, 100, 56);
+    background-color: hsl(43, 100, 56%);
   }
 }
 
@@ -159,7 +160,7 @@ a {
   background-color: var(--psychic);
 
   &:hover {
-    background-color: hsl(324, 56, 54);
+    background-color: hsl(324, 56, 54%);
   }
 }
 
@@ -167,7 +168,7 @@ a {
   background-color: var(--ice);
 
   &:hover {
-    background-color: hsl(196, 78, 51);
+    background-color: hsl(196, 78, 51%);
   }
 }
 
@@ -175,7 +176,7 @@ a {
   background-color: var(--dragon);
 
   &:hover {
-    background-color: hsl(214, 68, 48);
+    background-color: hsl(214, 68, 48%);
   }
 }
 
@@ -184,7 +185,7 @@ a {
   background-color: var(--dark);
 
   &:hover {
-    background-color: hsl(0, 0, 10);
+    background-color: hsl(0, 0, 10%);
   }
 }
 
@@ -192,6 +193,6 @@ a {
   background-color: var(--fairy);
 
   &:hover {
-    background-color: hsl(326, 73, 63);
+    background-color: hsl(326, 73, 63%);
   }
 }

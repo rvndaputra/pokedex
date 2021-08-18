@@ -1,42 +1,28 @@
-import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import { Link } from "react-router-dom";
+import Pokeball from "../../assets/images/pokeball.png";
+import PokemonImg from "../../components/PokemonImg";
 import { PokemonFragment } from "../../generated/graphql";
+import { getBgColorType, renderEmojiType } from "../../utils/meta.util";
 import { uppercaseFirstLetterEachWord } from "../../utils/transform.util";
-
-interface PokemonProps {
-  pokemon: PokemonFragment;
-}
-
-const pokemonEffect = keyframes`
-  0% {
-    right: -25px;
-    transform: scale(0.975);
-  }
-}`;
 
 const PokemonWrapper = styled.li<{ color: string }>`
   position: relative;
   box-shadow: 0 0 200px 5px ${(props) => props.color};
+  border-radius: 15px;
 
   a {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 125px;
-
-    &:hover {
-      img {
-        transform: scale(1.25);
-      }
-    }
   }
 `;
 
 const Number = styled.span`
-  margin: 1rem 1.25rem 0.25rem;
-  font-size: 1.25rem;
+  margin: 1rem 1.25rem 0;
+  color: #000000;
   font-weight: 700;
 `;
 
@@ -54,6 +40,8 @@ const Owned = styled.span`
 
 const Types = styled.div`
   display: flex;
+  border-radius: 0 0 15px 15px;
+  overflow: hidden;
 `;
 
 const Type = styled.span`
@@ -62,71 +50,59 @@ const Type = styled.span`
   text-align: center;
 `;
 
-const PokemonImg = styled.img`
+const StyledPokemonImg = styled(PokemonImg)`
   position: absolute;
-  right: -15px;
+  right: 5px;
   bottom: 25px;
-  height: 100px;
-  padding: 1.25rem;
-  text-align: center;
-  animation: ${pokemonEffect} 1.5s ease infinite alternate-reverse;
+  height: 125px;
   transition: transform 2s;
-
-  @media (max-width: 576px) {
-    right: -15px;
-    bottom: 5px;
-    height: 125px;
-  }
+  z-index: 2;
 `;
 
-const pokemonTypes: Record<any, { bg: string; emoji: string }> = {
-  normal: { bg: "#ffffff", emoji: "" },
-  fighting: { bg: "#e9573f", emoji: "🥊" },
-  flying: { bg: "#4fc1e9", emoji: "🌪" },
-  poison: { bg: "#967adc", emoji: "☣️" },
-  ground: { bg: "#f6bb42", emoji: "⛰️" },
-  rock: { bg: "#fc6e51", emoji: "🪨" },
-  bug: { bg: "#37bc9b", emoji: "🐞" },
-  ghost: { bg: "#ac92ec", emoji: "👻" },
-  steel: { bg: "#aab2bd", emoji: "🤖" },
-  fire: { bg: "#da4453", emoji: "🔥" },
-  water: { bg: "#3bafda", emoji: "💦" },
-  grass: { bg: "#a0d468", emoji: "🌿" },
-  electric: { bg: "#ffce54", emoji: "⚡️" },
-  psychic: { bg: "#d770ad", emoji: "🔮" },
-  ice: { bg: "#4fc1e9", emoji: "❄️" },
-  dragon: { bg: "#4a89dc", emoji: "🐉" },
-  dark: { bg: "#aaaaaa", emoji: "🖤" },
-  fairy: { bg: "#ec87c0", emoji: "🧚" },
-  unknown: { bg: "brown", emoji: "🃏" },
-  shadow: { bg: "brown", emoji: "🕷️" },
-};
+const PokeballImgWrapper = styled.div`
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  border-radius: 15px;
+  overflow: hidden;
+`;
+
+const PokeballImg = styled.img`
+  position: absolute;
+  right: -100px;
+  bottom: -25px;
+  height: 200px;
+  transition: transform 2s;
+  filter: invert(100%);
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.75) 0%,
+    transparent 75%
+  );
+`;
+
+interface PokemonProps {
+  pokemon: PokemonFragment;
+}
 
 const Pokemon = ({ pokemon }: PokemonProps) => {
-  const validPokemonType = (type: string) => pokemonTypes[type];
+  const { types } = pokemon;
 
-  const renderEmojiType = (type: string) =>
-    validPokemonType(type) ? `${pokemonTypes[type].emoji} ${type}` : type;
-
-  const { pokemontypes } = pokemon;
-
-  const mainType = pokemontypes[0].type?.name ?? "";
+  const mainType = types[0].type?.name ?? "";
 
   return (
-    <PokemonWrapper
-      className={mainType}
-      color={validPokemonType(mainType) ? pokemonTypes[mainType].bg : "#ffffff"}
-    >
-      <Link to={`/pokedex/${pokemon.name}`}>
-        <PokemonImg
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
-          alt=""
-        />
+    <PokemonWrapper className={mainType} color={getBgColorType(mainType)}>
+      <Link to={`/${pokemon.name}#meta`}>
+        <StyledPokemonImg pokemonId={pokemon.id} alt="" />
+        <PokeballImgWrapper>
+          <PokeballImg src={Pokeball} alt="" />
+        </PokeballImgWrapper>
         <Number>{`#${pokemon.order}`}</Number>
         <Name>{uppercaseFirstLetterEachWord(pokemon.name)}</Name>
         <Owned>Owned: 0</Owned>
         <Types>
-          {pokemontypes.map((pokemontype) => (
+          {types.map((pokemontype) => (
             <Type
               key={pokemontype.type?.name}
               className={pokemontype.type?.name}
