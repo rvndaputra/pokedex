@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import { useContext, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import Error from "../../components/Error.component";
+import Loading from "../../components/Loading.component";
 import { MyPokemonContext } from "../../contexts/my-pokemon.context";
 import {
   Order_By,
@@ -149,9 +151,11 @@ const PokemonDetail = (props: PokemonDetailProps) => {
     }
   }, [data]);
 
-  if (loading) return <div>loading...</div>;
-  if (error) return <div>error!</div>;
-  if (!data) return null;
+  if (loading) return <Loading />;
+  if (error) return <Error error={error.message} />;
+
+  if (!data || data.pokemon.length === 0)
+    return <Error title={false} error="Pokemon not found!" />;
 
   const pokemon = data.pokemon[0];
 

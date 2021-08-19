@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Pokeball from "../../assets/images/pokeball.png";
+import Error from "../../components/Error.component";
 import NavigationBar from "../../components/NavigationBar.component";
 import { MyPokemonContext } from "../../contexts/my-pokemon.context";
 import { Types } from "../../reducers/my-pokemon.reducer";
@@ -50,51 +51,55 @@ const MyPokemon = (props: MyPokemonProps) => {
 
   return (
     <div>
-      {state.pokemons.length === 0 && <div>You don't have any Pokemon</div>}
-      <PokemonsWrapper>
-        {state.pokemons.map((pokemon) => {
-          const { types } = pokemon;
+      {state.pokemons.length === 0 ? (
+        <Error title={false} error="You don't have any Pokemon!" />
+      ) : (
+        <PokemonsWrapper>
+          {state.pokemons.map((pokemon) => {
+            const { types } = pokemon;
 
-          const mainType = types[0].type?.name ?? "";
+            const mainType = types[0].type?.name ?? "";
 
-          return (
-            <div
-              css={css`
-                display: flex;
-                gap: 0.5rem;
-                max-height: 125px;
-              `}
-            >
-              <PokemonWrapper
-                className={mainType}
-                color={getBgColorType(mainType)}
+            return (
+              <div
+                key={pokemon.id}
+                css={css`
+                  display: flex;
+                  gap: 0.5rem;
+                  max-height: 125px;
+                `}
               >
-                <Link to={`/${pokemon.pokemon_name}`}>
-                  <StyledPokemonImg pokemonId={pokemon.pokemon_id} alt="" />
-                  <PokeballImgWrapper>
-                    <PokeballImg src={Pokeball} alt="" />
-                  </PokeballImgWrapper>
-                  <Number>{`#${pokemon.order}`}</Number>
-                  <Name>{pokemon.name}</Name>
-                  <PokemonTypes>
-                    {types.map((type) => (
-                      <PokemonType
-                        key={type.type?.id}
-                        color={getBgColorType(type.type?.name ?? "")}
-                      >
-                        {renderEmojiType(type.type?.name ?? "")}
-                      </PokemonType>
-                    ))}
-                  </PokemonTypes>
-                </Link>
-              </PokemonWrapper>
-              <ReleaseButton onClick={() => releasePokemon(pokemon.id)}>
-                Release
-              </ReleaseButton>
-            </div>
-          );
-        })}
-      </PokemonsWrapper>
+                <PokemonWrapper
+                  className={mainType}
+                  color={getBgColorType(mainType)}
+                >
+                  <Link to={`/${pokemon.pokemon_name}`}>
+                    <StyledPokemonImg pokemonId={pokemon.pokemon_id} alt="" />
+                    <PokeballImgWrapper>
+                      <PokeballImg src={Pokeball} alt="" />
+                    </PokeballImgWrapper>
+                    <Number>{`#${pokemon.order}`}</Number>
+                    <Name>{pokemon.name}</Name>
+                    <PokemonTypes>
+                      {types.map((type, idx) => (
+                        <PokemonType
+                          key={idx}
+                          color={getBgColorType(type.type?.name ?? "")}
+                        >
+                          {renderEmojiType(type.type?.name ?? "")}
+                        </PokemonType>
+                      ))}
+                    </PokemonTypes>
+                  </Link>
+                </PokemonWrapper>
+                <ReleaseButton onClick={() => releasePokemon(pokemon.id)}>
+                  Release
+                </ReleaseButton>
+              </div>
+            );
+          })}
+        </PokemonsWrapper>
+      )}
       <NavigationBar />
     </div>
   );

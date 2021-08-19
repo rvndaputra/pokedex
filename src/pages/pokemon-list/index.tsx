@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import React from "react";
 import { Link } from "react-router-dom";
 import Pokeball from "../../assets/images/pokeball-color.png";
+import Error from "../../components/Error.component";
+import Loading from "../../components/Loading.component";
 import NavigationBar from "../../components/NavigationBar.component";
 import { usePokemonQuery } from "../../generated/graphql";
 import Pokemon from "./Pokemon";
@@ -24,11 +26,14 @@ export const PokemonsWrapper = styled.ul`
 interface PokemonsProps {}
 
 const Pokemons = (props: PokemonsProps) => {
-  const { data, loading } = usePokemonQuery({ variables: { limit: 250 } });
+  const { data, loading, error } = usePokemonQuery({
+    variables: { limit: 250 },
+  });
 
-  if (loading) <div>loading...</div>;
+  if (loading) return <Loading />;
+  if (error) return <Error error={error.message} />;
 
-  if (!data) return null;
+  if (!data) return <Error title={false} error="No data" />;
 
   return (
     <>
