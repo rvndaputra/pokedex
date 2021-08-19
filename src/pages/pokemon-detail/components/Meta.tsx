@@ -33,6 +33,7 @@ const throwBall = keyframes`
     transform: scale(1.3)
   }
   100% {
+    opacity: 1;
     top: 50%;
     left: 47.2%;
     transform: scale(1)
@@ -140,7 +141,7 @@ const Detail = styled.div`
 
 const PokeballImgWrapper = styled.div<{ throwing: boolean }>`
   position: absolute;
-  top: 150%;
+  opacity: 0;
   width: 5%;
   ${(props) =>
     props.throwing &&

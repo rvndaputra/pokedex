@@ -8,13 +8,13 @@ const MyPokemon = React.lazy(() => import("./pages/my-pokemon"));
 
 function App() {
   return (
-    <Switch>
-      <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading />}>
+      <Switch>
         <Route path="/mypokemon" component={MyPokemon} />
         <Route path="/:pokemonName" component={PokemonDetail} />
         <Route path="/" component={Pokemons} />
-      </Suspense>
-    </Switch>
+      </Switch>
+    </Suspense>
   );
 }
 
