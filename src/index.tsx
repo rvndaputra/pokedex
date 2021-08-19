@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
+import { MyPokemonProvider } from "./contexts/my-pokemon.context";
 import "./index.scss";
 import client from "./libs/apollo";
 import reportWebVitals from "./reportWebVitals";
@@ -12,7 +13,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <Router>
-        <App />
+        <MyPokemonProvider>
+          <App />
+        </MyPokemonProvider>
       </Router>
     </ApolloProvider>
   </React.StrictMode>,

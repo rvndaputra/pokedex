@@ -1,24 +1,24 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
+import { Link } from "react-router-dom";
+import Pokeball from "../../assets/images/pokeball-color.png";
+import NavigationBar from "../../components/NavigationBar.component";
 import { usePokemonQuery } from "../../generated/graphql";
 import Pokemon from "./Pokemon";
 
-const PokemonsWrapper = styled.ul`
+export const PokemonsWrapper = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 2rem;
-  padding: 1rem 1.25rem;
-  overflow: hidden;
+  padding: 2rem 1.25rem;
+  padding-bottom: 3.75rem;
   list-style: none;
-  margin: auto;
 
   @media (max-width: 576px) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
-`;
-
-const Title = styled.h1`
-  font-size: 2.25rem;
 `;
 
 interface PokemonsProps {}
@@ -31,14 +31,33 @@ const Pokemons = (props: PokemonsProps) => {
   if (!data) return null;
 
   return (
-    <div>
+    <>
       <PokemonsWrapper>
-        <Title>Pokedex</Title>
+        <div
+          css={css`
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+          `}
+        >
+          <h1
+            css={css`
+              font-size: 2.25rem;
+            `}
+          >
+            Pokedex
+          </h1>
+          <Link to="/mypokemon">
+            <img src={Pokeball} alt="" height="40px" />
+          </Link>
+        </div>
         {data.pokemon.map((pokemon) => (
           <Pokemon key={pokemon.id} pokemon={pokemon} />
         ))}
       </PokemonsWrapper>
-    </div>
+      <NavigationBar />
+    </>
   );
 };
 

@@ -127,6 +127,8 @@ const PokemonDetail = (props: PokemonDetailProps) => {
       );
     }
 
+    alert("Pokemon has been added 😃");
+
     dispatch({
       type: Types.Catch,
       payload: {

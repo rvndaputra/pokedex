@@ -51711,17 +51711,17 @@ export type Subscription_RootPokemon_V2_Versionname_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-export type PokemonFragment = { __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> };
+export type PokemonFragment = { __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', id: number, name: string }> }> };
 
 export type PokemonAbilitiesFragment = { __typename?: 'pokemon_v2_pokemon', abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', is_hidden: boolean, ability?: Maybe<{ __typename?: 'pokemon_v2_ability', name: string }> }> };
 
 export type PokemonMovesFragment = { __typename?: 'pokemon_v2_pokemon', moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', id: number, level: number, move?: Maybe<{ __typename?: 'pokemon_v2_move', name: string, power?: Maybe<number>, accuracy?: Maybe<number>, pp?: Maybe<number>, move_effect_chance?: Maybe<number>, pokemon_v2_type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> };
 
-export type PokemonSpecyFragment = { __typename?: 'pokemon_v2_pokemon', specy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', capture_rate?: Maybe<number>, evolutionchain?: Maybe<{ __typename?: 'pokemon_v2_evolutionchain', species: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string, pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> }> }> }> };
+export type PokemonSpecyFragment = { __typename?: 'pokemon_v2_pokemon', specy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', capture_rate?: Maybe<number>, evolutionchain?: Maybe<{ __typename?: 'pokemon_v2_evolutionchain', species: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string, pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', id: number, name: string }> }> }> }> }> }> };
 
 export type PokemonStatsFragment = { __typename?: 'pokemon_v2_pokemon', stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, stat?: Maybe<{ __typename?: 'pokemon_v2_stat', id: number, name: string }> }> };
 
-export type PokemonTypesFragment = { __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> };
+export type PokemonTypesFragment = { __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', id: number, name: string }> }> };
 
 export type PokemonDetailQueryVariables = Exact<{
   PokemonWhere: Pokemon_V2_Pokemon_Bool_Exp;
@@ -51732,14 +51732,14 @@ export type PokemonDetailQueryVariables = Exact<{
 }>;
 
 
-export type PokemonDetailQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }>, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', is_hidden: boolean, ability?: Maybe<{ __typename?: 'pokemon_v2_ability', name: string }> }>, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, stat?: Maybe<{ __typename?: 'pokemon_v2_stat', id: number, name: string }> }>, specy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', capture_rate?: Maybe<number>, evolutionchain?: Maybe<{ __typename?: 'pokemon_v2_evolutionchain', species: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string, pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> }> }> }>, moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', id: number, level: number, move?: Maybe<{ __typename?: 'pokemon_v2_move', name: string, power?: Maybe<number>, accuracy?: Maybe<number>, pp?: Maybe<number>, move_effect_chance?: Maybe<number>, pokemon_v2_type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> }> };
+export type PokemonDetailQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', id: number, name: string }> }>, abilities: Array<{ __typename?: 'pokemon_v2_pokemonability', is_hidden: boolean, ability?: Maybe<{ __typename?: 'pokemon_v2_ability', name: string }> }>, stats: Array<{ __typename?: 'pokemon_v2_pokemonstat', base_stat: number, stat?: Maybe<{ __typename?: 'pokemon_v2_stat', id: number, name: string }> }>, specy?: Maybe<{ __typename?: 'pokemon_v2_pokemonspecies', capture_rate?: Maybe<number>, evolutionchain?: Maybe<{ __typename?: 'pokemon_v2_evolutionchain', species: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string, pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', id: number, name: string }> }> }> }> }> }>, moves: Array<{ __typename?: 'pokemon_v2_pokemonmove', id: number, level: number, move?: Maybe<{ __typename?: 'pokemon_v2_move', name: string, power?: Maybe<number>, accuracy?: Maybe<number>, pp?: Maybe<number>, move_effect_chance?: Maybe<number>, pokemon_v2_type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> }> };
 
 export type PokemonQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
 }>;
 
 
-export type PokemonQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', name: string }> }> }> };
+export type PokemonQuery = { __typename?: 'query_root', pokemon: Array<{ __typename?: 'pokemon_v2_pokemon', id: number, name: string, order?: Maybe<number>, height?: Maybe<number>, weight?: Maybe<number>, types: Array<{ __typename?: 'pokemon_v2_pokemontype', type?: Maybe<{ __typename?: 'pokemon_v2_type', id: number, name: string }> }> }> };
 
 export type TypeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -51750,6 +51750,7 @@ export const PokemonTypesFragmentDoc = gql`
     fragment PokemonTypes on pokemon_v2_pokemon {
   types: pokemon_v2_pokemontypes {
     type: pokemon_v2_type {
+      id
       name
     }
   }
