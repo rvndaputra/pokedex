@@ -1,17 +1,16 @@
-import { render, screen } from "@testing-library/react";
-import React from "react";
+import { fireEvent, render, screen } from "@testing-library/react";
+import React, { useReducer } from "react";
 import { BrowserRouter } from "react-router-dom";
 import MyPokemon from "..";
 import { MyPokemonContext } from "../../../contexts/my-pokemon.context";
-
-const mockedDispatch = jest.fn();
+import { myPokemonReducer } from "../../../reducers/my-pokemon.reducer";
 
 const MockMyPokemon = (values: any) => {
+  const [pokemons, dispatch] = useReducer(myPokemonReducer, values.pokemons);
+
   return (
     <BrowserRouter>
-      <MyPokemonContext.Provider
-        value={{ state: values.state, dispatch: mockedDispatch }}
-      >
+      <MyPokemonContext.Provider value={{ state: { pokemons }, dispatch }}>
         <MyPokemon />
       </MyPokemonContext.Provider>
     </BrowserRouter>
@@ -20,7 +19,7 @@ const MockMyPokemon = (values: any) => {
 
 describe("my pokemon", () => {
   it("should render no pokemon message when pokemon length is 0", () => {
-    const values = { state: { pokemons: [] } };
+    const values = { pokemons: [] };
 
     render(<MockMyPokemon {...values} />);
 
@@ -31,17 +30,15 @@ describe("my pokemon", () => {
 
   it("should render pokemon list", () => {
     const values = {
-      state: {
-        pokemons: [
-          {
-            id: 1,
-            order: 1,
-            pokemon_name: "bulbasaur",
-            name: "saturdust",
-            types: [{ type: "grass" }, { type: "poison" }],
-          },
-        ],
-      },
+      pokemons: [
+        {
+          id: 1,
+          order: 1,
+          pokemon_name: "bulbasaur",
+          name: "saturdust",
+          types: [{ type: "grass" }, { type: "poison" }],
+        },
+      ],
     };
 
     render(<MockMyPokemon {...values} />);
@@ -49,5 +46,39 @@ describe("my pokemon", () => {
     const el = screen.getByText("saturdust");
 
     expect(el).toBeVisible();
+  });
+
+  it("should remove pokemon from list", async () => {
+    const values = {
+      pokemons: [
+        {
+          id: 1,
+          order: 1,
+          pokemon_name: "bulbasaur",
+          name: "saturdust",
+          types: [{ type: "grass" }, { type: "poison" }],
+        },
+        {
+          id: 2,
+          order: 1,
+          pokemon_name: "ivysaur",
+          name: "celcius",
+          types: [{ type: "grass" }, { type: "poison" }],
+        },
+      ],
+    };
+
+    render(<MockMyPokemon {...values} />);
+
+    const el = screen.getByText("saturdust");
+
+    const releaseBtnEl = screen.queryAllByText("Release");
+
+    window.confirm = jest.fn(() => true);
+    window.alert = jest.fn(() => true);
+
+    fireEvent.click(releaseBtnEl[0]);
+
+    expect(el).not.toBeInTheDocument();
   });
 });
