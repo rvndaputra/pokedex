@@ -1,10 +1,76 @@
+import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
 import PokemonImg from "../../../components/PokemonImg.component";
 import { PokemonDetailQuery } from "../../../generated/graphql";
 import { renderEmojiType } from "../../../utils/meta.util";
+import Pokeball from "../../../assets/images/pokeball-color.png";
+
+const throwBall = keyframes`
+  0% {
+    top: 150%;
+    left: 20%;
+    transform: scale(0.5)
+  }
+  35% {
+    top: 40%;
+    left: 41%;
+    transform: scale(1.2)
+  }
+  40% {
+    top: 37%;
+    left: 42%;
+    transform: scale(1.3)
+  }
+  42.5% {
+    top: 38.5%;
+    left: 42.5%;
+    transform: scale(1.3)
+  }
+  85% {
+    top: 38.5%;
+    left: 42.5%;
+    transform: scale(1.3)
+  }
+  100% {
+    top: 50%;
+    left: 47.2%;
+    transform: scale(1)
+  }
+`;
+
+const wiggle = keyframes`
+  0% {
+    transform: rotate(0);
+  }
+  10% {
+    transform: rotate(-15deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  30% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(0);
+  }
+`;
+
+const pokemonDisappear = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0
+  }
+`;
 
 const PokemonMetaWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,9 +93,16 @@ const PokemonType = styled.span`
   flex: 1;
 `;
 
-const PokemonImgWrapper = styled.div`
+const PokemonImgWrapper = styled.div<{ throwing: boolean }>`
   position: relative;
   margin-top: 1.5rem;
+  ${(props) =>
+    props.throwing &&
+    css`
+      animation: ${pokemonDisappear} 0.5s 1;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+    `}
 
   &::after {
     content: "";
@@ -65,11 +138,24 @@ const Detail = styled.div`
   }
 `;
 
+const PokeballImgWrapper = styled.div<{ throwing: boolean }>`
+  position: absolute;
+  top: 150%;
+  width: 5%;
+  ${(props) =>
+    props.throwing &&
+    css`
+      animation: ${throwBall} 2s 1, ${wiggle} 1s 3 2s;
+      animation-fill-mode: forwards;
+    `}
+`;
+
 interface MetaProps {
+  throwing: boolean;
   pokemon: PokemonDetailQuery["pokemon"][number];
 }
 
-const Meta = ({ pokemon }: MetaProps) => {
+const Meta = ({ throwing, pokemon }: MetaProps) => {
   const { types } = pokemon;
 
   return (
@@ -82,7 +168,7 @@ const Meta = ({ pokemon }: MetaProps) => {
           </PokemonType>
         ))}
       </PokemonTypes>
-      <PokemonImgWrapper>
+      <PokemonImgWrapper throwing={throwing}>
         <PokemonImg pokemonId={pokemon.id} height="200px" />
       </PokemonImgWrapper>
       <Details>
@@ -105,6 +191,9 @@ const Meta = ({ pokemon }: MetaProps) => {
           <span>HEIGHT</span>
         </Detail>
       </Details>
+      <PokeballImgWrapper throwing={throwing}>
+        <img src={Pokeball} alt="" width="100%" />
+      </PokeballImgWrapper>
     </PokemonMetaWrapper>
   );
 };

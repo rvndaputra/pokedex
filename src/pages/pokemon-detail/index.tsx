@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Error from "../../components/Error.component";
@@ -14,6 +14,7 @@ import {
 } from "../../generated/graphql";
 import { Types } from "../../reducers/my-pokemon.reducer";
 import { getBgColorType } from "../../utils/meta.util";
+import { sleep } from "../../utils/sleep.util";
 import { uppercaseFirstLetterEachWord } from "../../utils/transform.util";
 import About from "./components/About";
 import Evolution from "./components/Evolution";
@@ -24,7 +25,8 @@ const buttonWave = keyframes`
   0% {
     height: calc(100% + 10px);
     width: calc(100% + 10px);
-}`;
+  }
+`;
 
 const PokemonDetailWrapper = styled.div`
   display: flex;
@@ -89,6 +91,7 @@ const PokemonDetail = (props: PokemonDetailProps) => {
       PokemonMovesWhere: { order: { _eq: 1 }, version_group_id: { _eq: 16 } },
     },
   });
+  const [throwing, setThrowing] = useState<boolean>(false);
 
   const divMetaRef = useRef<HTMLDivElement>(null);
 
@@ -97,6 +100,7 @@ const PokemonDetail = (props: PokemonDetailProps) => {
   const catchPokemon = async (
     pokemon: PokemonDetailQuery["pokemon"][number]
   ) => {
+    setThrowing(false);
     // const captured = capture(
     //   (pokemon.specy?.capture_rate as number) / 100
     // );
@@ -197,7 +201,7 @@ const PokemonDetail = (props: PokemonDetailProps) => {
           <About pokemon={pokemon} />
         </div>
         <div id="meta" ref={divMetaRef}>
-          <Meta pokemon={pokemon} />
+          <Meta pokemon={pokemon} throwing={throwing} />
         </div>
         <div id="evolution">
           <Evolution pokemonspecy={specy} />
@@ -226,12 +230,13 @@ const PokemonDetail = (props: PokemonDetailProps) => {
           About
         </Button>
         <AddButton
-          onClick={() => {
+          onClick={async () => {
             divMetaRef.current?.scrollIntoView();
+            setThrowing(true);
 
-            setTimeout(() => {
-              catchPokemon(pokemon);
-            }, 1000);
+            await sleep(3000);
+
+            catchPokemon(pokemon);
           }}
         >
           +
