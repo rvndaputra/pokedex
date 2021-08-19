@@ -26,8 +26,18 @@
   src: local("FreePixel"), url(./assets/fonts/FreePixel.ttf) format("truetype");
 }
 
-body {
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, "FreePixel", "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
@@ -40,10 +50,6 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-ul {
-  padding: 0;
 }
 
 a {

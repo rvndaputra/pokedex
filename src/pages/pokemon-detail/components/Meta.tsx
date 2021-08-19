@@ -1,8 +1,6 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
-import PokemonImg from "../../../components/PokemonImg";
+import PokemonImg from "../../../components/PokemonImg.component";
 import { PokemonDetailQuery } from "../../../generated/graphql";
 import { renderEmojiType } from "../../../utils/meta.util";
 
@@ -11,9 +9,7 @@ const PokemonMetaWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
   height: 100%;
-  max-width: 300px;
 `;
 
 const Name = styled.h2`
@@ -22,26 +18,42 @@ const Name = styled.h2`
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 `;
 
-const Types = styled.div`
+const PokemonTypes = styled.div`
   display: flex;
   width: 300px;
 `;
 
-const Type = styled.span`
+const PokemonType = styled.span`
   flex: 1;
+`;
+
+const PokemonImgWrapper = styled.div`
+  position: relative;
+  margin-top: 1.5rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    display: block;
+    height: 30px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 const Details = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: 1rem;
-  width: 100%;
+  margin: 2.5rem;
+  width: 35%;
 `;
 
 const Detail = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem;
 
   > div {
     display: flex;
@@ -63,34 +75,16 @@ const Meta = ({ pokemon }: MetaProps) => {
   return (
     <PokemonMetaWrapper>
       <Name>{pokemon.name}</Name>
-      <Types>
+      <PokemonTypes>
         {types.map((type) => (
-          <Type key={type.type?.name}>
+          <PokemonType key={type.type?.id}>
             {renderEmojiType(type.type?.name ?? "")}
-          </Type>
+          </PokemonType>
         ))}
-      </Types>
-      <div
-        css={css`
-          flex: 1;
-          position: relative;
-          margin-top: 1.5rem;
-
-          &::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            display: block;
-            height: 30px;
-            width: 200px;
-            background-color: rgba(0, 0, 0, 0.25);
-            border-radius: 50%;
-            transform: translateX(-50%);
-          }
-        `}
-      >
-        <PokemonImg pokemonId={pokemon.id} height="175px" />
-      </div>
+      </PokemonTypes>
+      <PokemonImgWrapper>
+        <PokemonImg pokemonId={pokemon.id} height="200px" />
+      </PokemonImgWrapper>
       <Details>
         <Detail>
           <div>

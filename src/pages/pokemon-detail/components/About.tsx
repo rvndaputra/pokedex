@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React from "react";
-import PokemonImg from "../../../components/PokemonImg";
+import PokemonImg from "../../../components/PokemonImg.component";
 import { PokemonDetailQuery } from "../../../generated/graphql";
 
 const AboutWrapper = styled.div`
@@ -10,8 +10,6 @@ const AboutWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
-  height: 100%;
   height: 100%;
 `;
 
@@ -28,15 +26,8 @@ const Box = styled.div`
   background-color: #ffffff;
   border-radius: 15px;
 
-  > span {
-    &:nth-of-type(2) {
-      text-transform: capitalize;
-    }
-
-    &:last-child {
-      font-weight: 700;
-      font-size: 1.25rem;
-    }
+  > span:last-child {
+    font-weight: 700;
   }
 `;
 
@@ -64,13 +55,7 @@ const About = ({ pokemon }: AboutProps) => {
 
   return (
     <AboutWrapper>
-      <PokemonImg
-        pokemonId={pokemon.id}
-        css={css`
-          width: 12.5%;
-          max-width: 300px;
-        `}
-      />
+      <PokemonImg pokemonId={pokemon.id} width="10%" />
       <Stats>
         {stats.map(
           (stat) =>
@@ -86,10 +71,10 @@ const About = ({ pokemon }: AboutProps) => {
       </Stats>
       <Box
         css={css`
+          margin: 1rem;
+          padding: 1rem;
           width: 100%;
           max-width: 300px;
-          padding: 1rem;
-          margin: 1rem;
         `}
       >
         <span>🎲</span>
@@ -98,8 +83,7 @@ const About = ({ pokemon }: AboutProps) => {
       </Box>
       <h4
         css={css`
-          margin: 0 0 0.5rem;
-          text-align: left;
+          margin-bottom: 0.25rem;
         `}
       >
         Moves:

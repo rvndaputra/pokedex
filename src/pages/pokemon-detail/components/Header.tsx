@@ -36,7 +36,9 @@ const Header = (props: HeaderProps) => {
           alt="pokemon logo"
         />
       </div>
-      <img src={Pokeball} alt="" height="40px" />
+      <Link to="/mypokemon">
+        <img src={Pokeball} alt="" height="40px" />
+      </Link>
     </HeaderWrapper>
   );
 };
